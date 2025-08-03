@@ -25,6 +25,7 @@ const AdminLoginPage = () => {
 
     try {
       // Query the database for the admin user
+      console.log('Attempting to query admin_users table for username:', credentials.username);
       const { data: adminUsers, error } = await supabase
         .from('admin_users')
         .select('*')
@@ -32,7 +33,10 @@ const AdminLoginPage = () => {
         .eq('is_active', true)
         .single();
 
+      console.log('Supabase query result:', { adminUsers, error });
+
       if (error || !adminUsers) {
+        console.error('Database query failed:', error);
         throw new Error('Invalid credentials');
       }
 
