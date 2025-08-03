@@ -47,6 +47,11 @@ const AdminLoginPage = () => {
       });
       
       const isPasswordValid = await bcrypt.compare(credentials.password, adminUsers.password_hash);
+      console.log('Password comparison details:', {
+        inputPassword: credentials.password,
+        storedHash: adminUsers.password_hash,
+        comparisonResult: isPasswordValid
+      });
       console.log('Password validation result:', isPasswordValid);
 
       if (!isPasswordValid) {
