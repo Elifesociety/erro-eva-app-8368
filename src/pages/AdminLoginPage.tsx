@@ -46,6 +46,11 @@ const AdminLoginPage = () => {
         userFound: !!adminUsers
       });
       
+      // Test bcrypt functionality first
+      const testHash = await bcrypt.hash('test123', 10);
+      const testCompare = await bcrypt.compare('test123', testHash);
+      console.log('Bcrypt test:', { testHash, testCompare });
+      
       const isPasswordValid = await bcrypt.compare(credentials.password, adminUsers.password_hash);
       console.log('Password comparison details:', {
         inputPassword: credentials.password,
